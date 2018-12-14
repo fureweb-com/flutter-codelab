@@ -23,3 +23,8 @@ class MyApp extends StatelessWidget {
 class RandomWordsState extends State<RandomWords> {
   // TODO Add build method
 }
+
+class RandomWords extends StatefulWidget {
+  @override
+  RandomWordsState createState() => new RandomWordsState();
+}
