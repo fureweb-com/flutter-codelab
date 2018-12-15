@@ -58,6 +58,7 @@ class RandomWordsState extends State<RandomWords> {
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
+        textAlign: TextAlign.left,
       ),
       trailing: new Icon(
         alreadySaved ? Icons.favorite : Icons.favorite_border,
