@@ -46,6 +46,29 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    Column buildButtonColumn(IconData icon, String label) {
+      Color color = Theme.of(context).primaryColor;
+
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color),
+          Container(
+            margin: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.w400,
+                color: color,
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
