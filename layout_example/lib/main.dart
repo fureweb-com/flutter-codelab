@@ -90,15 +90,18 @@ Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situate
       ),
     );
 
-    Widget imageSection = ListView(
-      children: [
-        Image.asset(
-          'images/lake.jpg',
-          height: 240.0,
-          fit: BoxFit.cover,
-        ),
-      ],
+    Widget imageSection = Image.asset(
+      'images/lake.jpg',
+      height: 240.0,
+      fit: BoxFit.cover,
     );
+
+    Widget bodySection = ListView(children: [
+      imageSection,
+      titleSection,
+      buttonSection,
+      textSection,
+    ]);
 
     return MaterialApp(
         title: 'Flutter Demo',
@@ -109,7 +112,7 @@ Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situate
           appBar: AppBar(
             title: Text('Top Lakes'),
           ),
-          body: imageSection,
+          body: bodySection,
         ));
   }
 }
