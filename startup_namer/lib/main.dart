@@ -23,6 +23,13 @@ class RandomWordsState extends State<RandomWords> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Startup Name Generator'),
+        centerTitle: true,
+        actions: <Widget>[
+          new IconButton(
+            icon: const Icon(Icons.list), 
+            onPressed: _pushSaved
+          ),
+        ],
       ),
       body: _buildSuggestions(),
     );
@@ -30,16 +37,16 @@ class RandomWordsState extends State<RandomWords> {
 
   Widget _buildSuggestions() {
     return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          if (i.isOdd) return Divider();
+      padding: const EdgeInsets.all(16.0),
+      itemBuilder: (context, i) {
+        if (i.isOdd) return Divider();
 
-          final index = i ~/ 2;
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_suggestions[index]);
-        });
+        final index = i ~/ 2;
+        if (index >= _suggestions.length) {
+          _suggestions.addAll(generateWordPairs().take(10));
+        }
+        return _buildRow(_suggestions[index]);
+      });
   }
 
   Widget _buildRow(WordPair pair) {
@@ -62,6 +69,38 @@ class RandomWordsState extends State<RandomWords> {
           }
         });
       },
+    );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          final Iterable<ListTile> tiles = _saved.map(
+            (WordPair pair) {
+              return new ListTile(
+                title: new Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return new Scaffold(
+            appBar: new AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: new ListView(children: divided),
+          );
+        },
+
+      ),
     );
   }
 }
